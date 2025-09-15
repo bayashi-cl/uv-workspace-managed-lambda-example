@@ -1,0 +1,32 @@
+[project]
+name = "example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Masaki Kobayashi", email = "bayashi.cl@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = ["example-common", "example-lambda-a", "example-lambda-b"]
+
+[build-system]
+requires = ["uv_build>=0.8.17,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+example-lambda-a = { workspace = true }
+example-lambda-b = { workspace = true }
+example-common = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "boto3-stubs[lambda]>=1.40.31",
+    "mypy>=1.18.1",
+    "nox>=2025.5.1",
+    "pytest>=8.4.2",
+    "ruff>=0.13.0",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["example", "example_*"]
